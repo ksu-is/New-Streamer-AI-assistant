@@ -1,0 +1,73 @@
+# Stream Health Monitor Configuration
+
+# OBS WebSocket Configuration
+obs:
+  host: "localhost"
+  port: 4455
+  password: ""
+  reconnect_interval: 5
+  max_reconnect_attempts: 10
+
+# System Metrics Configuration
+system:
+  poll_interval: 5  # seconds
+  obs_process_monitoring: true
+
+# Storage Configuration
+storage:
+  database_path: "data/stream_health.db"
+  retention_hours: 24
+  aggregation_intervals:
+    - 5    # 5-second buckets
+    - 60   # 1-minute buckets
+    - 300  # 5-minute buckets
+
+# Alerting Configuration
+alerts:
+  enabled: true
+  suppression_seconds: 300  # 5 minutes
+  
+  thresholds:
+    dropped_frames_percent: 5
+    cpu_percent: 85
+    memory_percent: 90
+    bitrate_variance_percent: 15
+    network_latency_ms: 200
+    fps_drop_threshold: 5
+
+  severity_levels:
+    - INFO
+    - WARNING
+    - CRITICAL
+
+# Notification Channels
+notifications:
+  console:
+    enabled: true
+    level: "INFO"
+  
+  file:
+    enabled: true
+    path: "logs/stream_health.log"
+    level: "DEBUG"
+  
+  webhook:
+    enabled: false
+    url: ""
+    level: "WARNING"
+
+# Platform Integration (Optional)
+platform:
+  douyin:
+    enabled: false
+    poll_interval: 30
+  
+  bili:
+    enabled: false
+    poll_interval: 30
+
+# StreamerAI Integration
+streamer_ai:
+  enabled: false
+  database_path: "../StreamerAI/data/test.db"
+  control_table: "monitor_commands"
