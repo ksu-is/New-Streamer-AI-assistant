@@ -27,15 +27,23 @@ pip install -e .
 
 ## Quick Start
 
+### With Poetry
 ```bash
-# Run with default configuration
+poetry install
 poetry run stream-monitor
-
-# Or run the CLI dashboard
 poetry run stream-monitor-dashboard
+```
 
-# Use a custom config file
-poetry run stream-monitor config.yaml
+### With pip
+```bash
+pip install -e .
+python -m stream_monitor.main
+python -m stream_monitor.ui.cli_dashboard
+```
+
+### Using a custom config file
+```bash
+python -m stream_monitor.main config.yaml
 ```
 
 ## Configuration
